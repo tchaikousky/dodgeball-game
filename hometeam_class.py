@@ -17,9 +17,11 @@ class Hometeam(Player):
 
     def __init__(self, name):
         super(Hometeam, self).__init__()
-        self.name = name
+        self.name = name 
+        transColor = self.image.get_at((0,0))
         player_img = pygame.image.load("player-imgs/home_team_idle.png").convert()
         self.image = pygame.transform.scale(player_img, (50, 75))
+        self.image.set_colorkey(transColor)
         self.rect = self.image.get_rect()
 
     def update_players(self, pressed_keys): 
@@ -27,18 +29,22 @@ class Hometeam(Player):
             self.rect.move_ip(0, -7)
             self.image = pygame.image.load("player-imgs/home_team_idle.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
         if pressed_keys[K_DOWN]:
             self.rect.move_ip(0, 7)
             self.image = pygame.image.load("player-imgs/home_team_idle.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
         if pressed_keys[K_LEFT]:
             self.rect.move_ip(-9, 0)
             self.image = pygame.image.load("player-imgs/0_Citizen_Walk_006.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(9, 0)
             self.image = pygame.image.load("player-imgs/walk_right.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
 
     def update_players_1(self, pressed_keys):
         self.update_players(pressed_keys)

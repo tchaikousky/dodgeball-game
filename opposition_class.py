@@ -22,26 +22,31 @@ class Opposition(Player):
         opp_img = pygame.image.load("player-imgs/0_Goblin_Running_000.png").convert()
         self.image = pygame.transform.scale(opp_img, (50, 75))
         self.rect = self.image.get_rect()
+        self.image.set_colorkey(self.image.get_at((0,0)))
 
     def update_opps(self):
         num = randint(1,4)
         self.rect = self.get_rect()
         if num == 1:
-            self.rect.move_ip(0, -20)
+            self.rect.move_ip(0, -90)
             opp_img = pygame.image.load("player-imgs/0_Goblin_Running_000.png").convert()
             self.image = pygame.transform.scale(opp_img, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
         if num == 2:
-            self.rect.move_ip(0, 20)
+            self.rect.move_ip(0, 90)
             opp_img = pygame.image.load("player-imgs/0_Goblin_Running_000.png").convert()
             self.image = pygame.transform.scale(opp_img, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
         if num == 3:
-            self.rect.move_ip(-20, 0)
+            self.rect.move_ip(-90, 0)
             opp_img = pygame.image.load("player-imgs/0_Goblin_Running_000.png").convert()
             self.image = pygame.transform.scale(opp_img, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
         if num == 4:
-            self.rect.move_ip(20, 0)
+            self.rect.move_ip(90, 0)
             self.image = pygame.image.load("player-imgs/0_Goblin_Running_009.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
+            self.image.set_colorkey(self.image.get_at((0,0)))
     
     def update_opps_1(self):
         self.update_opps()
