@@ -51,8 +51,6 @@ all_sprites.add(player2)
 all_sprites.add(player3)
 all_balls = pygame.sprite.Group()
 all_balls.add(ball1)
-
-
     
 # Run until the user asks to quit
 running = True
@@ -79,12 +77,10 @@ def draw_scene(level_count):
             
         elif isinstance(entity, Opposition):
             if entity == opp_1:
-                # print("dog")
                 screen.blit(entity.image, entity.rect)        
             elif entity == opp_2:
                 screen.blit(entity.image, entity.rect)      
             elif entity == opp_3:
-                # print("mouse")
                 screen.blit(entity.image, entity.rect)
             print(entity.get_rect())
 
@@ -100,13 +96,11 @@ def draw_scene(level_count):
             else:
                 player_list.remove(entity.name)
                 if len(player_list) == 0:
-                    # level_count += 1
-                    # draw_scene(level_count)
                     level_count = 10
                     
         print(entity.name)
 
-        #Get all the keys currently pressed
+    #Get all the keys currently pressed
     pressed_keys = pygame.key.get_pressed()
     # Update the player sprite based on keypresses
     if len(player_list) == 3:
@@ -155,8 +149,6 @@ def draw_scene(level_count):
                 opp_2.update_opps_1()
             else:
                 opp_3.update_opps_1()
-        
-        # return level_count
 
 while running:
     
@@ -169,22 +161,7 @@ while running:
                     sprite.kill()
                 level_count += 1
             draw_scene(1)
-            
-                
-        # elif level_count == 2:
-        #     level = Level("player-imgs/level2.jpg", [0,0])
-        #     if len(opp_list) == 0:
-        #         for sprite in all_sprites:
-        #             sprite.kill()
-        #     draw_scene(2)
-        #     level_count += 1
-        # elif level_count == 3:
-        #     level = Level("player-imgs/level1_img.jpg", [0,0])
-        #     draw_scene(3)
-        #     if len(opp_list) == 0:
-        #         for sprite in all_sprites:
-        #             sprite.kill()
-        #         level_count += 1
+
         else: 
             # player_count = 0
             level = Level("player-imgs/game_over.png", [0,0])
@@ -196,9 +173,7 @@ while running:
         for opp in enemies:
             opp.kill()
         draw_scene(100)
-    
 
-    # level_count = draw_scene(1)
     pygame.time.delay(25)
     for event in pygame.event.get():
         if event.type == KEYDOWN:
@@ -209,49 +184,8 @@ while running:
             running = False
             break
 
-    
-
-    
-
     count += 1
-    # screen.fill((0, 0, 0))
-    # screen.blit(level.image, level.rect)
-    # for entity in all_sprites:
-        
-    #     if isinstance(entity, Hometeam):
-    #         if entity == player:
-    #             screen.blit(entity.image, entity.rect)    
-    #         elif entity == player2:
-    #             screen.blit(entity.image, entity.rect)
-    #         elif entity == player3:
-    #             screen.blit(entity.image, entity.rect)
-            
-    #     elif isinstance(entity, Opposition):
-    #         if entity == opp_1:
-    #             # print("dog")
-    #             screen.blit(entity.image, entity.rect)        
-    #         elif entity == opp_2:
-    #             screen.blit(entity.image, entity.rect)      
-    #         elif entity == opp_3:
-    #             # print("mouse")
-    #             screen.blit(entity.image, entity.rect)
-    #         print(entity.get_rect())
-
-    #     screen.blit(ball1.surf, ball1.rect)
-        
-        
-    #     if entity.detect_collision(ball1) == True:
-    #         entity.kill()
-    #         if isinstance(entity, Opposition):
-    #             opp_list.remove(entity.name)
-    #             if len(opp_list) == 0:
-    #                 level_count += 1
-    #         else:
-    #             player_list.remove(entity.name)
-    #             if len(player_list) == 0:
-    #                 level_count += 1
-    #                 screen.blit(level.image, level.rect)
-    #     print(entity.name)
+    
     pygame.display.flip()
     
 # Done! Time to quit.

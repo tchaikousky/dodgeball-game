@@ -15,7 +15,6 @@ class Player(pygame.sprite.Sprite):
         super(Player, self).__init__()
         player_img = pygame.image.load("player-imgs/0_Citizen_Idle_000.png").convert()
         self.image = pygame.transform.scale(player_img, (50, 75))
-        # self.surf.fill((0,0,0))
         self.rect = self.image.get_rect()
     
     def get_rect(self):
