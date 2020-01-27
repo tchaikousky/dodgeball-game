@@ -26,22 +26,22 @@ class Hometeam(Player):
 
     def update_players(self, pressed_keys): 
         if pressed_keys[K_UP]:
-            self.rect.move_ip(0, -7)
+            self.rect.move_ip(0, -15)
             self.image = pygame.image.load("player-imgs/home_team_idle.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
             self.image.set_colorkey(self.image.get_at((0,0)))
         if pressed_keys[K_DOWN]:
-            self.rect.move_ip(0, 7)
+            self.rect.move_ip(0, 15)
             self.image = pygame.image.load("player-imgs/home_team_idle.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
             self.image.set_colorkey(self.image.get_at((0,0)))
         if pressed_keys[K_LEFT]:
-            self.rect.move_ip(-9, 0)
+            self.rect.move_ip(-20, 0)
             self.image = pygame.image.load("player-imgs/0_Citizen_Walk_006.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
             self.image.set_colorkey(self.image.get_at((0,0)))
         if pressed_keys[K_RIGHT]:
-            self.rect.move_ip(9, 0)
+            self.rect.move_ip(20, 0)
             self.image = pygame.image.load("player-imgs/walk_right.png").convert()
             self.image = pygame.transform.scale(self.image, (50, 75))
             self.image.set_colorkey(self.image.get_at((0,0)))

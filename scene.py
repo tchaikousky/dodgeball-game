@@ -103,6 +103,7 @@ def draw_scene(level_count):
                     # level_count += 1
                     # draw_scene(level_count)
                     level_count = 10
+                    
         print(entity.name)
 
         #Get all the keys currently pressed
@@ -158,6 +159,7 @@ def draw_scene(level_count):
         # return level_count
 
 while running:
+    
     game_over = isGameOver(len(player_list))
     if game_over == False:
         if level_count == 1:
@@ -184,10 +186,16 @@ while running:
         #             sprite.kill()
         #         level_count += 1
         else: 
+            # player_count = 0
             level = Level("player-imgs/game_over.png", [0,0])
             for opp in enemies:
                 opp.kill()
             draw_scene(100)
+    else: 
+        level = Level("player-imgs/game_over.png", [0,0])
+        for opp in enemies:
+            opp.kill()
+        draw_scene(100)
     
 
     # level_count = draw_scene(1)
