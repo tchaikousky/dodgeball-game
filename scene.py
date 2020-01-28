@@ -5,6 +5,7 @@ from opposition_class import *
 from hometeam_class import *
 from ball_stub import *
 from level_class import *
+from os import path
 from pygame.locals import (
     K_UP,
     K_DOWN,
@@ -12,10 +13,54 @@ from pygame.locals import (
     K_RIGHT,
     K_ESCAPE,
     KEYDOWN,
+    K_SPACE,
     QUIT,
 )
+############################################################
+img_dir = path.join(path.dirname(__file__), 'img')
+snd_dir = path.join(path.dirname(__file__), 'snd')
+pygame.font.init()
+pygame.font.SysFont("Arial",115)
 
-pygame.init()
+pygame.mixer.init(48000, -16, 1, 1024)
+
+black = (0,0,0)
+white = (255,255,255)
+red = (200,0,0)
+off_white = (200,200,200) 
+green = (0,200,0)
+bright_red = (255,0,0)
+bright_green = (0,255,0)
+
+gameText = pygame.font.SysFont("Arial",115)
+
+game_title = pygame.display.set_caption("DODGEBALL 2k20")
+
+# Defining text objects?
+def text_objects(text, font):
+    textSurface = font.render(text, True, white)
+    return textSurface, textSurface.get_rect()
+
+def black_text_objects(text, font):
+    textSurface = font.render(text, True, black)
+    return textSurface, textSurface.get_rect()
+
+# This is the text for the title on the intro screen
+def message_display(text):
+    gameText = pygame.font.SysFont("Arial",75)
+    TextSurf, TextRect = text_objects(text, gameText)
+    TextRect.center = ((round(SCREEN_WIDTH/2)),(round(SCREEN_HEIGHT/2)))
+    screen.blit(TextSurf, TextRect)
+
+# This is the message for the space key funcitonality on the intro screen
+def continue_message_display(text):
+    gameText = pygame.font.SysFont("Arial",25)
+    TextSurf, TextRect = text_objects(text, gameText)
+    TextRect.center = ((round(SCREEN_WIDTH/2)),(round(SCREEN_HEIGHT/1.5)))
+    screen.blit(TextSurf, TextRect)
+############################################################
+
+# pygame.init()
 
 # Set up the drawing window
 SCREEN_WIDTH = 800
@@ -51,10 +96,40 @@ all_sprites.add(player2)
 all_sprites.add(player3)
 all_balls = pygame.sprite.Group()
 all_balls.add(ball1)
-    
+
+pygame.init()
+########################################
+intro = True
+while intro:
+    screen.fill(black)
+    message_display("DODGEBALL 2k20")
+    continue_message_display("PRESS THE SPACE KEY TO CONTINUE")
+    pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                intro = False
+                pygame.quit()
+                quit()
+                break
+        elif event.type == QUIT:
+            intro = False
+            pygame.quit()
+            quit()
+        if event.type == KEYDOWN:
+            if event.key == K_SPACE:
+                intro = False
+                break
+
+pygame.mixer.init()
+in_game_song = pygame.mixer.Sound(path.join(snd_dir, "hot_wav_version.wav"))
+in_game_song.set_volume(0.1)
+###############################################
+
 # Run until the user asks to quit
 running = True
 count = 0
+
 def isGameOver(player_count):
     if player_count == 0:
         game_over = True
@@ -97,8 +172,6 @@ def draw_scene(level_count):
                 player_list.remove(entity.name)
                 if len(player_list) == 0:
                     level_count = 10
-                    
-        print(entity.name)
 
     #Get all the keys currently pressed
     pressed_keys = pygame.key.get_pressed()
@@ -151,11 +224,12 @@ def draw_scene(level_count):
                 opp_3.update_opps_1()
 
 while running:
-    
+
     game_over = isGameOver(len(player_list))
     if game_over == False:
         if level_count == 1:
-            level = Level("player-imgs/basketball_court.jpg", [0,0])
+            level = Level("img/fancy-court.png", [0,0])
+            in_game_song.play()
             if len(opp_list) == 0:
                 for sprite in all_sprites:
                     sprite.kill()
